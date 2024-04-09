@@ -4,18 +4,22 @@ def is_cyclic(graph):
     visited = set()
     for node in graph:
         if node not in visited:
-            if dfs(node, graph, visited, None):
+            if bfs(node, graph, visited):
                 return True
     return False
 
-def dfs(start, graph, visited, parent):
-    visited.add(start)
-    for neighbor in graph[start]:
-        if neighbor not in visited:
-            if dfs(neighbor, graph, visited, start):
+def bfs(start, graph, visited):
+    queue = deque([(start, None)])
+
+    while queue:
+        node, parent = queue.popleft()
+        visited.add(node)
+
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                queue.append((neighbor, node))
+            elif neighbor != parent:
                 return True
-        elif neighbor != parent:
-            return True
     return False
 
 def read_graph_from_file(filename):
@@ -34,7 +38,6 @@ def main():
 
     with open("output.txt", "w") as output_file:
         output_file.write(str(cyclic))
-
 
 if __name__ == "__main__":
     main()
