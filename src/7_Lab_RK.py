@@ -18,7 +18,7 @@ def rabin_karp_search(haystack, needle):
 
     for i in range(haystack_len - needle_len + 1):
         if window_hash == needle_hash:
-            if haystack[i:i + needle_len] == needle:  # Додаткова перевірка рядків
+            if haystack[i:i + needle_len] == needle:
                 result.append(i)
         if i < haystack_len - needle_len:
             window_hash = (window_hash - ord(haystack[i]) * base_l_minus_1) % modulus
