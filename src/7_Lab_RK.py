@@ -5,7 +5,7 @@ def rabin_karp_search(haystack, needle):
 
     haystack_len = len(haystack)
     needle_len = len(needle)
-    base = 256
+    base = 26
     modulus = 10 ** 9 + 7
 
 
@@ -26,6 +26,6 @@ def rabin_karp_search(haystack, needle):
         if i < haystack_len - needle_len:
             window_hash = (window_hash - ord(haystack[i]) * base_l_minus_1) % modulus
             window_hash = (window_hash * base + ord(haystack[i + needle_len])) % modulus
-            window_hash = (window_hash + modulus) % modulus  # Ensure non-negative
+            window_hash = (window_hash + modulus) % modulus
 
     return result
