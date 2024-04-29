@@ -27,23 +27,28 @@ def weddings_and_tribes(N, pairs):
     tribes = {}
 
     for boy, girl in pairs:
-        root_boy = ds.find(boy)
-        root_girl = ds.find(girl)
+        if boy % 2 == 0:
+            boy_id = boy + 1
+        else:
+            boy_id = boy
+
+        if girl % 2 == 0:
+            girl_id = girl + 1
+        else:
+            girl_id = girl
+
+        root_boy = ds.find(boy_id)
+        root_girl = ds.find(girl_id)
 
         if root_boy != root_girl:
-            ds.union(boy, girl)
+            ds.union(boy_id, girl_id)
 
-            if root_boy not in tribes:
-                tribes[root_boy] = 1
+            root = ds.find(boy_id)
+            if root not in tribes:
+                tribes[root] = 2
             else:
-                tribes[root_boy] += 1
+                tribes[root] += 2
 
     count = sum(size // 2 for size in tribes.values())
 
     return count
-
-N = int(input())
-pairs = [tuple(map(int, input().split())) for _ in range(N)]
-
-result = weddings_and_tribes(N, pairs)
-print(result)
