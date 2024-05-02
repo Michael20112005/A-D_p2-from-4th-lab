@@ -1,7 +1,7 @@
 class DisjointSet:
-    def __init__(self, n):
-        self.parent = [i for i in range(n)]
-        self.rank = [0] * n
+    def __init__(self, size):
+        self.parent = [i for i in range(size)]
+        self.rank = [0] * size
 
     def find(self, x):
         if self.parent[x] != x:
@@ -21,12 +21,12 @@ class DisjointSet:
                 self.parent[root_y] = root_x
                 self.rank[root_x] += 1
 
-def weddings_and_tribes(N, pairs):
-    ds = DisjointSet(20001)
+def weddings_and_tribes(num_pairs, pairs_list):
+    ds = DisjointSet(156)
 
     tribes = {}
 
-    for boy, girl in pairs:
+    for boy, girl in pairs_list:
         if boy % 2 == 0:
             boy_id = boy + 1
         else:
@@ -43,12 +43,12 @@ def weddings_and_tribes(N, pairs):
         if root_boy != root_girl:
             ds.union(boy_id, girl_id)
 
-            root = ds.find(boy_id)
-            if root not in tribes:
-                tribes[root] = 2
+            tribe_root = ds.find(boy_id)
+            if tribe_root not in tribes:
+                tribes[tribe_root] = 2
             else:
-                tribes[root] += 2
+                tribes[tribe_root] += 2
 
-    count = sum(size // 2 for size in tribes.values())
+    total_pairs = sum(size // 2 for size in tribes.values())
 
-    return count
+    return total_pairs
