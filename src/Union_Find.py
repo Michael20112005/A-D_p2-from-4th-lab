@@ -1,7 +1,6 @@
 class DisjointSet:
-    def __init__(self, size):
-        self.parent = [i for i in range(size)]
-        self.rank = [0] * size
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]
 
     def find(self, x):
         if self.parent[x] != x:
@@ -11,44 +10,32 @@ class DisjointSet:
     def union(self, x, y):
         root_x = self.find(x)
         root_y = self.find(y)
-
         if root_x != root_y:
-            if self.rank[root_x] < self.rank[root_y]:
-                self.parent[root_x] = root_y
-            elif self.rank[root_x] > self.rank[root_y]:
-                self.parent[root_y] = root_x
-            else:
-                self.parent[root_y] = root_x
-                self.rank[root_x] += 1
+            self.parent[root_y] = root_x
 
-def weddings_and_tribes(num_pairs, pairs_list):
-    ds = DisjointSet(156)
 
-    tribes = {}
+def weddings_and_tribes(pairs_list):
+    possible_pairs = set()
 
-    for boy, girl in pairs_list:
-        if boy % 2 == 0:
-            boy_id = boy + 1
-        else:
-            boy_id = boy
+    disjoint_set = DisjointSet(max(max(pair) for pair in pairs_list) + 1)
 
-        if girl % 2 == 0:
-            girl_id = girl + 1
-        else:
-            girl_id = girl
+    for pair in pairs_list:
+        x, y = pair
+        disjoint_set.union(x, y)
 
-        root_boy = ds.find(boy_id)
-        root_girl = ds.find(girl_id)
+    tribe_1 = [i for i in range(1, max(max(pair) for pair in pairs_list) + 1) if i % 2 == 1]
+    tribe_2 = [i for i in range(1, max(max(pair) for pair in pairs_list) + 1) if i % 2 == 0]
 
-        if root_boy != root_girl:
-            ds.union(boy_id, girl_id)
+    for boy in tribe_1:
+        for girl in tribe_2:
+            if disjoint_set.find(boy) != disjoint_set.find(girl):
+                possible_pairs.add((boy, girl))
 
-            tribe_root = ds.find(boy_id)
-            if tribe_root not in tribes:
-                tribes[tribe_root] = 2
-            else:
-                tribes[tribe_root] += 2
+    total_pairs = len(possible_pairs)
 
-    total_pairs = sum(size // 2 for size in tribes.values())
+    return total_pairs, possible_pairs
 
-    return total_pairs
+
+pairs_list = [(1, 2), (2, 3), (3, 4), (5, 6)]
+
+total_pairs, possible_pairs = weddings_and_tribes(pairs_list)
