@@ -1,32 +1,23 @@
+from graph_cycle import bfs
 import unittest
-import numpy as np
-import csv
-
-class TestSubmarineCableLength(unittest.TestCase):
-
-    def read_adj_matrix_from_file(self, filename):
-        with open(filename, 'r') as file:
-            reader = csv.reader(file)
-            adj_matrix = np.array([[int(val) for val in row] for row in reader])
-        return adj_matrix
 
 
-    def test_valid_distances(self):
-        adj_matrix = self.read_adj_matrix_from_file('islands.csv')
+class TestBFS(unittest.TestCase):
 
-        self.assertTrue(total_cable_length >= 0)
+    def test_cycle_start(self):
+        graph = {1: [2], 2: [3], 3: [1]}
+        visited = set()
+        self.assertTrue(bfs(1, graph, visited))
 
+    def test_start_node_with_no_outgoing_edges(self):
+        graph = {1: [2], 2: [3], 3: [1]}
+        visited = set()
+        self.assertTrue(bfs(1, graph, visited))
 
-    def test_negative_distances(self):
-        adj_matrix = self.read_adj_matrix_from_file('islands.csv')
-
-        self.assertTrue(total_cable_length < 0)
-
-
-    def test_large_distances(self):
-        adj_matrix = self.read_adj_matrix_from_file('islands.csv')
-
-        self.assertTrue(total_cable_length < 999999)
+    def test_start_node_with_one_outgoing_edge(self):
+        graph = {1: [2], 2: [3], 3: [1]}
+        visited = set()
+        self.assertTrue(bfs(2, graph, visited))
 
 
 if __name__ == '__main__':
