@@ -1,26 +1,27 @@
-from heap_based_priority_queue import PriorityTaskQueue
 import unittest
+from binary_tree import branchSums, BinaryTree
 
 
-class TestPriorityTaskQueue(unittest.TestCase):
+class TestBranchSums(unittest.TestCase):
+
     def test_good_case(self):
-        task_queue = PriorityTaskQueue()
-        task_queue.add_new_task('to tear out a mannequin_s caddy', 56)
-        task_queue.add_new_task('sink a toy boat', 666)
+        root = BinaryTree(3)
+        root.left = BinaryTree(9)
+        root.right = BinaryTree(20)
+        root.right.left = BinaryTree(15)
+        root.right.right = BinaryTree(7)
 
-        self.assertEqual(task_queue.get_highest_priority_task(), 'sink a toy boat')
+        self.assertEqual(branchSums(root), 24)
 
     def test_bad_case(self):
-        task_queue = PriorityTaskQueue()
-        task_queue.add_new_task('task 1', 10)
-        task_queue.add_new_task('task 2', 10)
+        root = None
 
-        self.assertEqual(task_queue.get_highest_priority_task(), 'task 1')
+        self.assertEqual(branchSums(root), 0)
 
-    def test_empty_case(self):
-        task_queue = PriorityTaskQueue()
+    def test_empty(self):
+        root = BinaryTree(0)  # Creating a tree with only the root node
 
-        self.assertIsNone(task_queue.get_highest_priority_task())
+        self.assertEqual(branchSums(root), 0)  # Expected sum of values is 0
 
 
 if __name__ == '__main__':
