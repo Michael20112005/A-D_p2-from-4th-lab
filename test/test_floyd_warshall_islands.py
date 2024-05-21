@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 import numpy as np
 import csv
 
-from src.floyd_warshall_islands import main
+from floyd_warshall_islands import main
 
 
 class TestSubmarineCableLength(unittest.TestCase):
