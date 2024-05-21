@@ -1,4 +1,4 @@
-from Rabin_Karp import rabin_karp_search
+from rabin_karp import rabin_karp_search
 import unittest
 
 
