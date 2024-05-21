@@ -1,5 +1,5 @@
 import unittest
-from binary_tree import branchSums, BinaryTree
+from sum_of_all_left_child import branchSums, BinaryTree
 
 
 class TestBranchSums(unittest.TestCase):
