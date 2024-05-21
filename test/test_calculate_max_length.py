@@ -1,4 +1,4 @@
-from main import calculate_max_length
+from calculate_max_lenght import calculate_max_length
 import unittest
 
 class TestCalculateMaxLength(unittest.TestCase):
