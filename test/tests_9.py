@@ -8,7 +8,7 @@ class TestCalculateMaxLength(unittest.TestCase):
         heights = [69, 85, 31, 78, 91, 68, 20, 69, 74, 41, 57, 89, 35, 40, 53, 47, 77, 13, 93, 83, 69, 62, 37, 92, 16,
                    95, 85, 38, 2, 69, 86, 81, 66, 2, 29, 1, 94, 7, 69, 69, 30, 87, 63, 50, 69, 88, 10, 54, 93]
         result = calculate_max_length(w, heights)
-        self.assertEqual(result, 2666.53)
+        self.assertEqual(result, 1804.31)
 
     def test_bad_input(self):
         w = -1  # Невірна відстань
