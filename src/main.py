@@ -17,7 +17,7 @@ def calculate_max_length(w, heights):
 
     max_length = 0.0
     for i in range(n - 1):
-        height_diff = max_heights[i] - max_heights[i + 1]
+        height_diff = heights[i] - heights[i + 1]
         max_length += math.sqrt(w ** 2 + height_diff ** 2)
 
     return round(max_length, 2)
