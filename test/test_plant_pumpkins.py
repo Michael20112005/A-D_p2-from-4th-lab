@@ -1,5 +1,8 @@
-from plant_pumpkins import plant_pumpkins_route
 import unittest
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+from plant_pumpkins import plant_pumpkins_route
 
 
 class TestPlantPumpkinsRoute(unittest.TestCase):
