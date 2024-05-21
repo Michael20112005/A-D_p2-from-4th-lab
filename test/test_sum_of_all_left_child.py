@@ -1,4 +1,7 @@
 import unittest
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from sum_of_all_left_child import branchSums, BinaryTree
 
 
