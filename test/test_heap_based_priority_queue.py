@@ -1,5 +1,8 @@
-from heap_based_priority_queue import PriorityTaskQueue
 import unittest
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+from heap_based_priority_queue import PriorityTaskQueue
 
 
 class TestPriorityTaskQueue(unittest.TestCase):
