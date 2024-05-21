@@ -1,5 +1,10 @@
-from calculate_max_length import calculate_max_length
 import unittest
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
+from calculate_max_length import calculate_max_length
+
 
 class TestCalculateMaxLength(unittest.TestCase):
 
