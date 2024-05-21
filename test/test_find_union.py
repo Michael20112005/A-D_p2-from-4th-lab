@@ -1,5 +1,8 @@
-from find_union import weddings_and_tribes
 import unittest
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+from find_union import weddings_and_tribes
 
 
 class TestWeddingsAndTribes(unittest.TestCase):
