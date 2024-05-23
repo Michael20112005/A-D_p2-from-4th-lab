@@ -2,40 +2,39 @@ import math
 
 
 def calculate_max_length(w, heights):
-
-    if w < 1 or not heights:
-        return 0.0
-
     n = len(heights)
-    max_heights = []
 
-    for i in range(n):
-        if i % 2 == 0:
-            max_heights.append(heights[i])
-        else:
-            max_heights.append(1)
+    list = [[0.0, 0.0] for _ in range(n)]
 
-    max_length = 0.0
-    for i in range(n - 1):
-        height_diff = heights[i] - heights[i + 1]
-        max_length += math.sqrt(w ** 2 + height_diff ** 2)
+    for i in range(1, n):
+        min_height_i_minus_1 = 1
+        max_height_i_minus_1 = heights[i - 1]
+        min_height_i = 1
+        max_height_i = heights[i]
 
-    return round(max_length, 2)
+        dist1 = math.sqrt(w ** 2 + (min_height_i_minus_1 - min_height_i) ** 2)
+        dist2 = math.sqrt(w ** 2 + (min_height_i_minus_1 - max_height_i) ** 2)
+        dist3 = math.sqrt(w ** 2 + (max_height_i_minus_1 - min_height_i) ** 2)
+        dist4 = math.sqrt(w ** 2 + (max_height_i_minus_1 - max_height_i) ** 2)
+
+        list[i][0] = max(list[i - 1][0] + dist1, list[i - 1][1] + dist3)
+        list[i][1] = max(list[i - 1][0] + dist2, list[i - 1][1] + dist4)
+
+    max_distance = max(list[n - 1][0], list[n - 1][1])
+
+    return round(max_distance, 2)
 
 
-def read_input(filename):
-    with open(filename, 'r') as file:
+def main():
+    with open('input1.txt', 'r') as file:
         w = int(file.readline().strip())
-        heights = list(map(int, file.readline().strip().split(',')))
-    return w, heights
+        heights = list(map(int, file.readline().strip().replace(',', '').split()))
 
-
-def write_output(filename, result):
-    with open(filename, 'w') as file:
-        file.write(str(result))
-
-
-if __name__ == '__main__':
-    w, heights = read_input('input1.txt')
     result = calculate_max_length(w, heights)
-    write_output('output1.txt', result)
+
+    with open('output1.txt', 'w') as file:
+        file.write(f"{result}\n")
+
+
+if __name__ == "__main__":
+    main()
