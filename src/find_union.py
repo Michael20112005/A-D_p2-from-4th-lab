@@ -34,8 +34,3 @@ def weddings_and_tribes(pairs_list):
     total_pairs = len(possible_pairs)
 
     return total_pairs, possible_pairs
-
-
-pairs_list = [(1, 2), (2, 3), (3, 4), (5, 6)]
-
-total_pairs, possible_pairs = weddings_and_tribes(pairs_list)
