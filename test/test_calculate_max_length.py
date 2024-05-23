@@ -1,5 +1,5 @@
 import math
-from main import calculate_max_length
+from calculate_max_length import calculate_max_length
 import unittest
 import sys
 import os
