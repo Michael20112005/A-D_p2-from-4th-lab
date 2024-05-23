@@ -1,7 +1,7 @@
 import math
 
 
-def calculate_max_length(w, heights):
+def max_length(w, heights):
     n = len(heights)
 
     list = [[0.0, 0.0] for _ in range(n)]
@@ -30,7 +30,7 @@ def main():
         w = int(file.readline().strip())
         heights = list(map(int, file.readline().strip().replace(',', '').split()))
 
-    result = calculate_max_length(w, heights)
+    result = max_length(w, heights)
 
     with open('output1.txt', 'w') as file:
         file.write(f"{result}\n")
