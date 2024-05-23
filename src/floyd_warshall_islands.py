@@ -38,11 +38,9 @@ def calculate_total_cable_length(adj_matrix):
         for j in range(num_vertices):
             if i != j and np.isinf(distances[i][j]):
                 distances[i][j] = INF
-                ## Floyd Warshall original algo also assignes distances from point K to itself as 0 lenght.
-                # Add if i == j: distances[i][j] = 0
+
     distances[distances == INF] = 999999
-                #Better to use INF again instead of 999999. P.S. if your typical distance extends 999999 number you'll
-                #have code mulfunction
+
     for k in range(num_vertices):
         for i in range(num_vertices):
             for j in range(num_vertices):
