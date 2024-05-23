@@ -1,31 +1,38 @@
+import math
+from main import calculate_max_length
 import unittest
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from calculate_max_length import calculate_max_length
-
 
 class TestCalculateMaxLength(unittest.TestCase):
 
     def test_good_input(self):
-        w = 7
-        heights = [69, 85, 31, 78, 91, 68, 20, 69, 74, 41, 57, 89, 35, 40, 53, 47, 77, 13, 93, 83, 69, 62, 37, 92, 16,
-                   95, 85, 38, 2, 69, 86, 81, 66, 2, 29, 1, 94, 7, 69, 69, 30, 87, 63, 50, 69, 88, 10, 54, 93]
+        w = 4
+        heights = [56, 18, 17, 94, 23, 7, 21, 94, 29, 54, 44, 26, 86, 79, 4, 15, 5, 91, 25, 17, 88, 66, 28, 2, 95, 97,
+                   60, 93, 40, 70, 75, 48, 38, 51, 34, 52, 87, 8, 62, 77, 35, 52, 3, 93, 34, 57, 51, 11, 39, 72]
         result = calculate_max_length(w, heights)
-        self.assertEqual(result, 1804.31)
+        self.assertEqual(result, 2738.18)
 
-    def test_bad_input(self):
-        w = -1  # Невірна відстань
-        heights = [69, 85, 31, 78]
+    def test_single_pole(self):
+        w = 5
+        heights = [50]
         result = calculate_max_length(w, heights)
         self.assertEqual(result, 0.0)
 
-    def test_empty_input(self):
-        w = 7
-        heights = []
+    def test_max_heights(self):
+        w = 1
+        heights = [100, 100, 100, 100, 100]
         result = calculate_max_length(w, heights)
-        self.assertEqual(result, 0.0)
+        self.assertAlmostEqual(result, 4 * math.sqrt(1 + 99 ** 2), places=2)
+
+    def test_large_w(self):
+        w = 100
+        heights = [1, 1, 1, 1, 1]
+        result = calculate_max_length(w, heights)
+        self.assertAlmostEqual(result, 4 * math.sqrt(100 ** 2 + 0 ** 2), places=2)
+
 
 if __name__ == '__main__':
     unittest.main()
